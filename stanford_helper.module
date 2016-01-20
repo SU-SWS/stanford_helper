@@ -1,0 +1,47 @@
+<?php
+/**
+ * @file
+ * File description
+ *
+ * Long description
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function stanford_helper_menu() {
+  /*
+   *$items['blog'] = array(
+   *  'title' => 'blogs',
+   *  'page callback' => 'blog_page',
+   *  'access arguments' => array('access content'),
+   *  'type' => MENU_SUGGESTED_ITEM,
+   *);
+   */
+  $items['admin/config/stanford'] = array(
+    'title' => 'Stanford Modules',
+    'description' => 'Stanford specific module configuration.',
+    'position' => 'left',
+    'weight' => -10,
+    'page callback' => 'stanford_helper_menu_block_page',
+    'access arguments' => array('access administration pages'),
+  );
+
+  return $items;
+}
+
+/**
+ * Helper function for stanford configuration menu items.
+ * @return string
+ *     HTML content.
+ */
+function stanford_helper_menu_block_page() {
+  $item = menu_get_item();
+  if ($content = system_admin_menu_block($item)) {
+    $output = theme('admin_block_content', array('content' => $content));
+  }
+  else {
+    $output = t('You do not have any administrative items.');
+  }
+  return $output;
+}
