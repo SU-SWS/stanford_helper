@@ -10,19 +10,12 @@
  * Implements hook_menu().
  */
 function stanford_helper_menu() {
-  /*
-   *$items['blog'] = array(
-   *  'title' => 'blogs',
-   *  'page callback' => 'blog_page',
-   *  'access arguments' => array('access content'),
-   *  'type' => MENU_SUGGESTED_ITEM,
-   *);
-   */
+
   $items['admin/config/stanford'] = array(
     'title' => 'Stanford Modules',
     'description' => 'Stanford specific module configuration.',
-    'position' => 'left',
-    'weight' => -10,
+    'position' => 'right',
+    'weight' => -50,
     'page callback' => 'stanford_helper_menu_block_page',
     'access arguments' => array('access administration pages'),
   );
