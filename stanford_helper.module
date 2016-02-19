@@ -38,3 +38,20 @@ function stanford_helper_menu_block_page() {
   }
   return $output;
 }
+
+
+/**
+ * Implements hook_preprocess().
+ */
+function stanford_helper_jumpstart_preprocess_node(&$vars) {
+
+  // If the view mode is not set to 'Full Page' because of display suite
+  // view_mode switch override settings or the title will show up double.
+  if (module_exists("ds") && isset($vars["ds_switch"])) {
+    $is_node_page = node_is_page($vars["node"]);
+    if ($is_node_page) {
+      $vars['page'] = TRUE;
+    }
+  }
+
+}
