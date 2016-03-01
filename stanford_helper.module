@@ -11,6 +11,7 @@
  */
 function stanford_helper_menu() {
 
+  // A path to group all of our configuration pages under.
   $items['admin/config/stanford'] = array(
     'title' => 'Stanford Modules',
     'description' => 'Stanford specific module configuration.',
@@ -24,7 +25,7 @@ function stanford_helper_menu() {
 }
 
 /**
- * Helper function for stanford configuration menu items.
+ * Helper function for stanford configuration page menu items.
  * @return string
  *     HTML content.
  */
@@ -53,5 +54,18 @@ function stanford_helper_jumpstart_preprocess_node(&$vars) {
       $vars['page'] = TRUE;
     }
   }
+
+}
+
+/**
+ * Implements hook_node_delete()
+ */
+function stanford_helper_node_delete($node) {
+
+  // Delete the path alias when the node is deleted.
+  $path = path_load(
+    array('source' => 'node/'.$node->nid)
+  );
+  path_delete($path['pid']);
 
 }
